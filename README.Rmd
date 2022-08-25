@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Metagenómica usando KBASE <img src="imgs/1.png" align="right" width="120px"/>
 
-**Autor: MsC. Kelly Hidalgo**
+**Autores: MsC. Kelly Hidalgo, MsC. Viviane Piccin, Dr. Leandro Lemos**
 
 Tutorial para el análisis de metagenomas obtenidos a partir de secuenciación masiva usando la plataforma Illumina. El procesamiento bioinformático será realizado usando la plataforma online [**KBASE**](). El *dataset* ejemplo usado para este tutorial, es un conjunto de seis sub-muestras con 200 mil secuencias cortas paired-end de 150 bp.
 

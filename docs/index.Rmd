@@ -1,7 +1,7 @@
 ---
 title: "Bioinformática aplicada a estudios con microorganismos"
 subtitle: "Análisis de metagenomas"
-author: Kelly Hidalgo
+author: MsC. Kelly Hidalgo, MsC. Viviane Piccin, Dr. Leandro Lemos
 institute: Grupo de Ecologia Microbiana e Multi-ômicas
 date: "`r Sys.Date()`"
 aspectratio: 169 # 16:9

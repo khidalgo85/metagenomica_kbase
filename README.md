@@ -9,7 +9,7 @@
 
 # Metagenómica usando KBASE <img src="imgs/1.png" align="right" width="120px"/>
 
-**Autor: MsC. Kelly Hidalgo**
+**Autores: MsC. Kelly Hidalgo, MsC. Viviane Piccin, Dr. Leandro Lemos**
 
 Tutorial para el análisis de metagenomas obtenidos a partir de
 secuenciación masiva usando la plataforma Illumina. El procesamiento
