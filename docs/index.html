@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Bioinformática aplicada a estudios con microorganismos</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Kelly Hidalgo" />
+    <meta name="date" content="2022-08-25" />
+    <script src="index_files/header-attrs-2.14/header-attrs.js"></script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"be16ede2041347f7a520d977d073d684","expires":1}</script>
+    <script src="index_files/himalaya-1.1.0/himalaya.js"></script>
+    <script src="index_files/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="index_files/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="index_files/editable-0.2.6/editable.js"></script>
+    <script src="index_files/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="index_files/shareon-1.4.1/shareon.min.css" rel="stylesheet" />
+    <script src="index_files/shareon-1.4.1/shareon.min.js"></script>
+    <link href="index_files/xaringanExtra-shareagain-0.2.6/shareagain.css" rel="stylesheet" />
+    <script src="index_files/xaringanExtra-shareagain-0.2.6/shareagain.js"></script>
+    <link href="index_files/panelset-0.2.6/panelset.css" rel="stylesheet" />
+    <script src="index_files/panelset-0.2.6/panelset.js"></script>
+    <link href="index_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="index_files/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="index_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="index_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+    <link href="index_files/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="index_files/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="index_files/tile-view-0.2.6/tile-view.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Bioinformática aplicada a estudios con microorganismos
+## Análisis de metagenomas
+### Kelly Hidalgo
+### Grupo de Ecologia Microbiana e Multi-ômicas
+### 2022-08-25
+
+---
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.huge .remark-code { /*Change made here*/
+  font-size: 150% !important;
+}
+.tiny .remark-code { /*Change made here*/
+  font-size: 60% !important;
+}
+&lt;/style&gt;
+
+
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.huge .remark-slide-content { /*Change made here*/
+  font-size: 30 px !important;
+}
+.tiny .remark-slide-content { /*Change made here*/
+  font-size: 7 px !important;
+}
+.big .remark-slide-content { /*Change made here*/
+  font-size: 18 px !important;
+}
+.normal .remark-slide-content { /*Change made here*/
+  font-size: 14 px !important;
+}
+&lt;/style&gt;
+
+<style>.panelset{--panel-tab-foreground: honeydew;--panel-tab-background: seagreen;}</style>
+
+
+
+
+
+
+
+<div>
+<style type="text/css">.xaringan-extra-logo {
+width: 110px;
+height: 128px;
+z-index: 0;
+background-image: url(imgs/1.png);
+background-size: contain;
+background-repeat: no-repeat;
+position: absolute;
+top:1em;right:1em;
+}
+</style>
+<script>(function () {
+  let tries = 0
+  function addLogo () {
+    if (typeof slideshow === 'undefined') {
+      tries += 1
+      if (tries < 10) {
+        setTimeout(addLogo, 100)
+      }
+    } else {
+      document.querySelectorAll('.remark-slide-content:not(.title-slide):not(.inverse):not(.hide_logo)')
+        .forEach(function (slide) {
+          const logo = document.createElement('div')
+          logo.classList = 'xaringan-extra-logo'
+          logo.href = null
+          slide.appendChild(logo)
+        })
+    }
+  }
+  document.addEventListener('DOMContentLoaded', addLogo)
+})()</script>
+</div>
+
+
+
+
+--
+class: center, middle, inverse
+
+.middle[.center[.huge[
+# Bienvenidos! 🇧🇷🇨🇴
+
+# Bem-vindos! 🇧🇷🇨🇴
+]]]
+
+
+---
+class: hide_logo
+
+### Grupo de Ecologia Microbiana e Multi-ômicas - GEMM
+
+GEMM es un grupo de investigación de la Universidade Estadual de Campínas, liderado por la **Doctora Valéria Maia Merzel**. Sus laboratorios están localizados dentro del Centro Pluridisciplinar de Pesquisas Químicas, Biológicas e Agrícolas - CPQBA y hace parte de la división de recursos microbianos - DRM. 
+
+.center[&lt;img src="imgs/Val.jpeg" width=15%&gt;]
+
+&lt;font size=3&gt;Nuestras principales líneas de investigación son:&lt;/font&gt;
+
+* &lt;font size=3&gt;Ecologia Microbiana Molecular&lt;/font&gt;
+* &lt;font size=3&gt;Bioprospección genómica&lt;/font&gt;
+* &lt;font size=3&gt;Microbiología Ambiental&lt;/font&gt;
+
+&lt;font size=3&gt;
+Nuestros principales intereses incluyen la compresión de la composición y el funcionamiento de las comunidades microbianas y de sus interacciones a travez del uso de abordajes multi-ómicas, con foco en ambientes asociados a petróleo y ambientes extremos como la Antártica.
+&lt;/font&gt;
+
+---
+
+## Grupo de Ecologia Microbiana e Multi-ômicas - GEMM
+
+
+**Alumnos de maestría**
+
+&lt;img src="imgs/ale.jpeg" width=10%&gt; 🇨🇴 &lt;font size=2.5&gt;**Alejandra Calderón Fajardo:** Microbióloga de la Universidad de Pamplona&lt;/font&gt;⛽
+
+** Alumnos de doctorado**
+
+
+&lt;img src="imgs/meli.jpeg" width=10%&gt; 🇵🇪 &lt;font size=2.5&gt;**MsC. Melissa Santa Cruz:** Bióloga de la Universidad de Trujillo - Perú &lt;/font&gt; 🥶
+
+&lt;img src="imgs/jessica.jpeg" width=10%&gt; 🇧🇷 &lt;font size=2.5&gt;**MsC. Jéssica Silva:** Bióloga de la Pontificia Universidade Católica de Campinas &lt;/font&gt;⛽ 🥶
+
+---
+
+** Alumnos de doctorado**
+
+&lt;img src="imgs/mavi.jpeg" width=10%&gt; 🇨🇴 &lt;font size=2.5&gt; **MsC. Mavi Blanco:** Biólogo de la Universidad Industrial de Santander &lt;/font&gt; 🥶
+
+&lt;img src="imgs/will.jpeg" width=10%&gt;🇧🇷 &lt;font size=2.5&gt;**MsC. William Medeiros:** Biológo de la Universidade Federal da Integração Latino-Americana -UNILA&lt;/font&gt; 🥶
+
+&lt;img src="imgs/kelly.jpg" width=10%&gt;🇨🇴 &lt;font size=2.5&gt;**MsC. Kelly Hidalgo:** Microbióloga Industrial de la Pontificia Universidad Javeriana&lt;/font&gt; ⛽ 
+
+**Pós-Doc**
+
+&lt;img src="imgs/leandro.jpeg" width=10%&gt;🇧🇷 &lt;font size=2.5&gt;**Dr. Leandro Nascimento Lemos:**  Bacharel em Ciências Biológicas de la Universidade Federal do Pampa&lt;/font&gt; 🌊
+
+---
+class: center, middle, inverse
+
+# 0. KBase
+
+---
+class: center, middle, inverse
+
+# Teoría Parte I: Calidad de la secuenciación
+
+---
+## Cuáles el producto final de la secuenciación?
+
+* Illumina: formato `.fastq` o `.fq`
+
+
+.center[
+&lt;img src="imgs/fastq.png" width=80%&gt;
+]
+
+* Para secuenciación *paired-end*, son dos archivos uno con las lecturas *fordward* y otro con las lecturas *reverse*.
+
+---
+class: hide_logo
+
+## Phred Quality Score
+
+* La calidad de las secuencias está determinada por la nota o *score* *Phred*. Según la siguiente ecuación:
+
+`$$q = -10 * log_{10}(P)$$`
+Donde, *q* es la nota *Phred* e *P* es la probabilidad de que la base esté errada. Así entonces:
+
+* `\(q = 10\)` significa 1 base errada a cada 10 (90%); `\(p = 0.1\)`
+* `\(q = 20\)` significa 1 base errada a cada 100 (99%); `\(p = 0.01\)`
+* `\(q = 30\)` significa 1 base errada a cada 1000 (99.9%) `\(p = 0.001\)`
+  
+**Mínimo aceptable** `\(q&gt;20\)`, **ideal** `\(q&gt;30\)`
+
+---
+## Phred Quality Score
+
+* Y entonces que son todos esos simbolos? 
+
+.center[
+&lt;img src="imgs/fastq.png" width=80%&gt;
+]
+
+
+---
+class: hide_logo
+
+## Phred Quality Score
+
+Para facilitar la escrita y la lectura de la información de calidad, es usada la tabla *ASCII*, para transformar los dos dígitos de *Phred Score* en un caracter solamente, para conseguir leer facilmente la calidad de cada base.
+
+
+[ASCII table](https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm)
+
+---
+## Como evaluar la calidad de las secuencias
+
+**FASTQC** es un programa que permite visualizar la información de calidad de las secuencias de una manera gráfica e interactiva.
+
+&lt;font size=2&gt;Nota: Durante el procesamiento de las secuencias será explorado un reporte FASTQC&lt;/font&gt;
+---
+class: hide_logo
+
+## *Trimming* (Depuración)
+
+Es el proceso de eliminación de las lecturas con baja calidad. Es posible filtrar secuencias baseado en el *score Phred*, o por ambiguedades (remoción de NNs), remoción de adaptadores, remoción de bases al inicio o al final de las secuencias. También es posible trimar por tamaño, por ejemplo eliminar todas las *reads* menores de 50 bp.
+
+
+**Programas**
+*Nota: Exclusivos para secuencias cortas*
+* Trimmomatic
+* Trimgalore
+* Fastx tool kit
+
+---
+class: center, middle, inverse
+
+# Tiempo para colocar en práctica!
+
+.center[
+![](https://media.giphy.com/media/MdA16VIoXKKxNE8Stk/giphy.gif)
+]
+
+---
+
+## Práctica I
+
+**Contenido**
+* Adquisición de datos
+* Creación de Narrativas
+* Importación de secuencias
+* Análisis de la calidad de las secuencias
+* *Trimming*
+
+
+[Tutorial](https://github.com/khidalgo85/https://github.com/khidalgo85/metagenomica_kbase#readme)
+---
+class: center, middle, inverse
+
+# Teoría Parte II: Ensamblaje de Metagenomas
+
+---
+class: hide_logo
+
+.center[## Ensamblaje de MetaGenomas de Novo]
+.center[##(Sin referencia)]
+
+.center[
+&lt;img src="imgs/assembly.png" width=80%&gt;
+]
+
+---
+# Tipos de lecturas (recortes)
+
+Existen diferentes tipos de lecturas/reads/secuencias, dependiendo de la tecnología y el protocolo usado. 
+
+.center[
+&lt;img src="imgs/reads.png" width=80%&gt;
+]
+
+Las secuencias *single-end* y *paired-end* son protocolos de Illumina y son consideradas secuencias cortas. 
+
+Los *long reads* o secuencias largas se pueden obtener con plataformas de secunciación de tercera generación como PacBio o Oxford Nanopore. Tienen un tamaño entre 10 mil y 15 mil pares de bases.
+
+---
+class: hide_logo
+
+### Qué significa "montar" un metagenoma
+
+A partir de los pedazos (recortes) armar los genomas presentes en un metagenoma. Pero si no tenemos un molde, cómo se sabe cual es el orden de las piezas? 
+
+.center[
+![](https://media.giphy.com/media/XbxxZbRzpcuSn1rbYk/giphy.gif)
+]
+
+---
+class: hide_logo
+
+## Organización del montaje
+
+* Contigs:  Secuencias contiguas, formadas pela sobreposición de un cojunto de reads
+
+.center[
+&lt;img src="imgs/contigs.png" width=80%&gt;
+]
+
+* Scaffolds: Unión de contigs
+
+.center[
+&lt;img src="imgs/scafold.png" width=80%&gt;
+]
+
+---
+class: hide_logo
+
+## Algorítmos
+
+Existen diferentes algorítmos para ensamblar genomas, y deben ser usados según el tipo de secuencias (cortas o largas).
+
+* Overlap - Layout - Consensus
+  * PacBio
+  
+.center[
+&lt;img src="imgs/olc.png" width=70%&gt;
+]
+
+---
+## Algorítmos
+* Grafo de De Bruijn
+  * Illumina
+
+.center[
+&lt;img src="imgs/debruijn.png" width=80%&gt;
+]
+
+---
+## Reads cortos vs reads largos
+
+.center[
+&lt;img src="imgs/colibri.png" width=80%&gt;
+]
+---
+## Repeticiones: Gran problema!
+
+.center[
+&lt;img src="imgs/avion.png" width=85%&gt;
+]
+
+---
+### Reads cortos
+
+.center[
+&lt;img src="imgs/avion2.png" width=85%&gt;
+]
+---
+### Reads largos
+
+.center[
+&lt;img src="imgs/avion3.png" width=85%&gt;
+]
+
+---
+## En resumen...
+
+1. Entre más pequeñas sean las piezas (reads cortos) más complicado será el proceso
+2. Piezas mayores (reads largos) facilitan el proceso de montaje
+3. Puede ser usado un molde (genoma de referencia) pero debe ser *muy* próximo.
+4. Un genoma de referencia "distante" genera ensambles erróneos.
+5. Entre mayor sea el número de cromosomas, más dificil es el proceso de montaje.
+6. Genomas con alto porcentaje de repeticiones son más dificiles de montar.
+
+---
+.center[## Programas para ensamblar]
+.center[##genomas]
+
+* Megahit (secuencias cortas)
+* Spades (secuencias cortas e largas)
+* Canu (secuencias largas)
+* Velvet, SOAP, IDBA, etc.
+---
+.center[## Como evaluar la calidad]
+.center[## del genoma ensamblado?]
+
+1. Número de contigs 
+2. Tamaño de los contigs
+3. Tamaño del mayor contig
+4. N50
+5. Tamaño total del montaje
+6. Completeza/ Contaminación
+
+&lt;font size=3&gt; Programa para evaluar el montaje, QUAST (1-5), BUSCO (6) &lt;/font&gt;
+
+---
+## N50
+
+50% del total de bp que están en el 50% de los contigs.
+
+**Ejemplo**
+
+Un genoma de 300 Mbp fue montado en 8 contigs. Los tamaños de los contigs son: 15 Mbp, 39 Mbp, 24 Mbp, 3 Mbp, 33 Mbp, 45 Mbp, 117 Mbp y 54 Mbp.
+
+1. Ordene de mayor a menor los tamaños de los contigs
+&gt; 117, 54, 45, 39, 33, 24, 15, 3, 3
+
+2. Cálcule la mitad del genoma
+&gt; 150 Mbp
+
+3. Sume los contigs hasta pasar de 150 Mbp, el tamaño de ese contig es el N50
+&gt; 54 Mbp
+
+---
+class: center, middle, inverse
+
+# Tiempo para colocar en práctica!
+.center[
+![](https://media.giphy.com/media/Wsju5zAb5kcOfxJV9i/giphy.gif)
+]
+---
+class: center, middle, inverse
+
+# Práctica II Montaje/Ensamble de MetaGenomas
+
+---
+## Práctica III
+
+
+**Contenido**
+
+* &lt;font size=2&gt;Ensamblaje de metagenomas: MetaSpades&lt;/font&gt;
+* &lt;font size=2&gt;Ensamblaje de metagenomas: MegaHit&lt;/font&gt;
+* &lt;font size=2&gt;Evaluación de la calidad de los ensambles&lt;/font&gt;
+
+[Tutorial](https://github.com/khidalgo85/https://github.com/khidalgo85/metagenomica_kbase#readme)
+
+---
+class: center, middle, inverse
+
+# Teoría Parte IV: Predicción de genes
+
+---
+## Como son encontrados los genes?
+
+Programas son capazes de identificar diferentes regiones funcionales del genoma:
+
+* Regiones codificantes de proteínas (ORFs)
+* Regiones no codificantes (UTR, íntrons, tRNA, rRNA, microRNAs, long non-coding RNAs)
+* Regiones reguladoras (promoteres, enhancer, silencers)
+
+---
+## Estructura de los genes
+
+**Procariotos**
+
+.center[&lt;img src="imgs/gene.png" width=85%&gt;]
+
+Los ORFs son secuencias codificantes que poseen:
+- Codón de iniciación
+- Región codificante (CDS)
+- Codón de terminación
+
+---
+## Predicción de genes en procariotos
+
+**Para el ínicio**
+
+Los algorítmos están entrenados para reconocer señales en la región promotora de los genes
+
+  * Existen secuencias consenso en la región -35 y la *TATA Box* en la región -10 del promotor.
+
+  * Codón de inicio *start codon*
+
+**Para el final**
+
+Los programas pueden reconocer señales la región terminadora de los genes
+
+  * Codón de terminación *stop codon*
+  
+---
+class: center, middle, inverse
+
+# Tiempo para colocar en práctica!
+.center[
+![](https://media.giphy.com/media/gfO1UMUVlM6i1BmKD2/giphy.gif)
+]
+
+---
+## Práctica III
+
+**Contenido**
+
+* Anotación Taxonómica
+* Anotación Funcional
+
+[Tutorial](https://github.com/khidalgo85/https://github.com/khidalgo85/metagenomica_kbase#readme)
+---
+
+class: center, middle, inverse
+
+# Teoría Parte V: Recuperación de Genomas a partir de Metagenomas
+
+---
+
+## Binning
+
+.center[&lt;img src="imgs/binning.png" width=70%&gt;]
+
+---
+class: hide_logo
+
+## Algoritmos
+
+.center[&lt;img src="imgs/binning2.png" width=70%&gt;]
+
+---
+
+## Control de calidad
+
+.center[&lt;img src="imgs/binning4.png" width=75%&gt;]
+
+---
+class: center, middle, inverse
+
+# Tiempo para colocar en práctica!
+.center[
+![](https://media.giphy.com/media/KfwyWfTwMu1FG0XhO8/giphy.gif)
+]
+
+---
+
+## Práctica IV
+
+**Contenido**
+
+* Co-assembly
+* Binning
+* De-replicación
+* Control de calidad
+* Anotación Taxonómica
+* Anotación Funcional
+
+[Tutorial](https://github.com/khidalgo85/https://github.com/khidalgo85/metagenomica_kbase#readme)
+
+---
+
+class: center, inverse
+
+## Obrigado! 🇧🇷🇨🇴
+
+.center[&lt;img src="imgs/grupo.png" width=90%&gt;]
+.center[&lt;img src="imgs/logos.png" width=70%&gt;]
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"navigation": {
+"scroll": false
+}
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
